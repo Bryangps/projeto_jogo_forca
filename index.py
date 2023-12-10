@@ -2,44 +2,46 @@ from random import choice
 from modulo import *
 
 lista = ['teclado', 'celular', 'avião', 'cachorro', 'carro', 'escola']
-sorteio = choice(lista)
-linha_potilhadas = []
-for v in range(len(sorteio)):
-    linha_potilhadas.append('_ ')
-print(sorteio)
-print(len(sorteio))
+palavra = choice(lista)
+letra_usuario = []
+print(palavra)
+
 
 #programa principal
 cabecalho('JOGO DA FORCA')
-dica(sorteio)
-tentativas = len(sorteio) + 2
-cont = 0
-while tentativas > 0:
-    letra = letra_adivinhar('Digite uma letra para adivinhar:')
+dica(palavra)
+chance = 4
+ganhou = False
+stop = True
+while stop:
+    try:
+        print(f'Você tem {chance} tentativas: ', end='')
+        for letra in palavra:
+            if letra in letra_usuario:
+                print(letra, end=' ')
+            else:
+                print('_', end=' ')
+        print('')
+        tentativas = letra_adivinhar('Digite uma letra para adivinhar:')
+        letra_usuario.append(tentativas)
 
-    posicao = []
-    if letra not in sorteio:
-        tentativas -= 1
-        print(f'Não tem a letra {letra}')
-        if tentativas != 0:
-            print(f'Você tem {tentativas} tentativas')
-        else:
-            print('Você perdeu, suas tentativas acabaram')
+        if tentativas not in palavra:
+            chance -= 1
+        ganhou = True
+        for letra in palavra:
+            if letra not in letra_usuario:
+                ganhou = False
+        if chance == 0 or ganhou:
+            stop = False
+
+    except TypeError:
+        stop = False
+
+if stop:
+    if ganhou:
+        print(f'Parabéns, você ganhou. A palavra era: \"{palavra}"')
     else:
-        for indice, valeu in enumerate(sorteio):
-            if letra == valeu:
-                posicao.append(indice)
-
-        for valor in posicao:
-            linha_potilhadas.pop(valor)
-            linha_potilhadas.insert(valor, letra)
-
-        for v in linha_potilhadas:
-            print(v, end=' ')
-        print()
-
-
-
+        print(f'Você perdeu. A plavra era \"{palavra}\"')
 
 
 
