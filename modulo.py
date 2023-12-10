@@ -5,7 +5,7 @@ def cabecalho(msg):
     print(f'-' * tote)
 
 
-def objeto(nome):
+def dica(nome):
     if nome == 'teclado':
         print(f'Advinha a palavra! Dica: \"palavra é um objeto que utilizamos para escreve algo.\"')
         print('_ ' * len(nome))
@@ -26,7 +26,7 @@ def objeto(nome):
         print('_ ' * len(nome))
 
 
-def verificacao(msg):
+def letra_adivinhar(msg):
     while True:
         try:
             letra = str(input(f'{msg} '))[0]

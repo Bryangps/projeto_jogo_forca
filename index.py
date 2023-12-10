@@ -3,24 +3,40 @@ from modulo import *
 
 lista = ['teclado', 'celular', 'avião', 'cachorro', 'carro', 'escola']
 sorteio = choice(lista)
-minha_lista = []
+linha_potilhadas = []
 for v in range(len(sorteio)):
-    minha_lista.append('_ ')
+    linha_potilhadas.append('_ ')
 print(sorteio)
 print(len(sorteio))
 
 #programa principal
 cabecalho('JOGO DA FORCA')
-objeto(sorteio)
-tote = len(sorteio) + 2
-contador = 0
-while tote > contador:
-    letra = verificacao('Digite uma letra para adivinhar:')
+dica(sorteio)
+tentativas = len(sorteio) + 2
+cont = 0
+while tentativas > 0:
+    letra = letra_adivinhar('Digite uma letra para adivinhar:')
 
-    for valores in minha_lista:
-        print(valores, end='')
-    print()
+    posicao = []
+    if letra not in sorteio:
+        tentativas -= 1
+        print(f'Não tem a letra {letra}')
+        if tentativas != 0:
+            print(f'Você tem {tentativas} tentativas')
+        else:
+            print('Você perdeu, suas tentativas acabaram')
+    else:
+        for indice, valeu in enumerate(sorteio):
+            if letra == valeu:
+                posicao.append(indice)
 
+        for valor in posicao:
+            linha_potilhadas.pop(valor)
+            linha_potilhadas.insert(valor, letra)
+
+        for v in linha_potilhadas:
+            print(v, end=' ')
+        print()
 
 
 
