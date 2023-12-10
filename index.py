@@ -4,7 +4,6 @@ from modulo import *
 lista = ['teclado', 'celular', 'avião', 'cachorro', 'carro', 'escola']
 palavra = choice(lista)
 letra_usuario = []
-print(palavra)
 
 
 #programa principal
