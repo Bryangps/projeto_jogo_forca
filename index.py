@@ -12,35 +12,32 @@ dica(palavra)
 chance = 4
 ganhou = False
 stop = True
-while stop:
-    try:
-        print(f'Você tem {chance} tentativas: ', end='')
-        for letra in palavra:
-            if letra in letra_usuario:
-                print(letra, end=' ')
-            else:
-                print('_', end=' ')
-        print('')
-        tentativas = letra_adivinhar('Digite uma letra para adivinhar:')
-        letra_usuario.append(tentativas)
+while True:
+    #try:
 
-        if tentativas not in palavra:
-            chance -= 1
-        ganhou = True
-        for letra in palavra:
-            if letra not in letra_usuario:
-                ganhou = False
-        if chance == 0 or ganhou:
-            stop = False
+    print(f'Você tem {chance} tentativas: ', end='')
+    for letra in palavra:
+        if letra in letra_usuario:
+            print(letra, end=' ')
+        else:
+            print('_', end=' ')
+    print('')
+    tentativas = letra_adivinhar('Digite uma letra para adivinhar:')
+    letra_usuario.append(tentativas)
 
-    except TypeError:
-        stop = False
+    if tentativas not in palavra:
+        chance -= 1
+    ganhou = True
+    for letra in palavra:
+        if letra not in letra_usuario:
+            ganhou = False
+    if chance == 0 or ganhou:
+        break
 
-if stop:
-    if ganhou:
-        print(f'Parabéns, você ganhou. A palavra era: \"{palavra}"')
-    else:
-        print(f'Você perdeu. A plavra era \"{palavra}\"')
+if ganhou:
+    print(f'Parabéns, você ganhou. A palavra era: \"{palavra}"')
+else:
+    print(f'Você perdeu. A plavra era \"{palavra}\"')
 
 
 
